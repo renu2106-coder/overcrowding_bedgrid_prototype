@@ -35,6 +35,7 @@ def home():
 # Prediction endpoint
 @app.post("/predict")
 def predict(data: PatientData):
+
     load_per_staff = data.Current_Patient_Count / (data.Staff_Availability + 1)
     emergency_pressure = data.Incoming_Emergency_Cases / (data.Current_Patient_Count + 1)
 
@@ -47,6 +48,10 @@ def predict(data: PatientData):
         load_per_staff,
         emergency_pressure
     ]])
+
+    # 👇 ADD THESE LINES
+    print("INPUT FEATURES:", features)
+    print("MODEL OUTPUT:", model.predict(features))
 
     prediction = model.predict(features)
 
