@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hackathon Project Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .team {
+            margin-bottom: 20px;
+        }
+
+        .alert span {
+            font-weight: bold;
+        }
+
+        .green { color: green; }
+        .yellow { color: orange; }
+        .red { color: red; }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Hackathon Project Summary Document</h1>
+
+    <div class="team">
+        <h2>Team Members</h2>
+        <ul>
+            <li>Angel Darala</li>
+            <li>Renuka Alla</li>
+            <li>Naveen Yelaballi</li>
+            <li>Shaina Md</li>
+            <li>Rishika Kancharana</li>
+            <li>Vamshi Krishna Kotekal Methukula</li>
+        </ul>
+    </div>
+
+    <h2>Project Title</h2>
+    <p><strong>Overcrowding Alert System</strong><br>
+    <em>"From data to decision"</em></p>
+
+    <h2>Project Goal</h2>
+    <p>
+        To predict whether a hospital department and its emergency room (ER) will become overcrowded 
+        using data-driven analysis and provide an early warning system.
+    </p>
+
+    <h2>Model Used</h2>
+    <p>Logistic Regression</p>
+
+    <h2>Target Variable</h2>
+    <ul>
+        <li>0 → Normal</li>
+        <li>1 → Overcrowded</li>
+    </ul>
+
+    <h2>Key Features (Input Parameters)</h2>
+    <ol>
+        <li><strong>Current Patient Count:</strong> Total number of patients currently in the hospital/ER.</li>
+        <li><strong>Bed Occupancy Rate:</strong> Percentage of hospital beds currently occupied.</li>
+        <li><strong>Staff Availability:</strong> Number of available medical staff.</li>
+        <li><strong>Average Waiting Time:</strong> Average patient waiting time.</li>
+        <li><strong>Incoming Emergency Cases:</strong> Number of incoming emergency cases.</li>
+    </ol>
+
+    <h2>Methodology</h2>
+    <ol>
+        <li> we have Collected raw data.</li>
+        <li>Pre-process the data (cleaning, normalization, handling missing values).</li>
+        <li>Train a Logistic Regression model.</li>
+        <li>Predict overcrowding status (0 or 1).</li>
+        <li>Convert prediction into a colour-based alert system.</li>
+    </ol>
+
+    <h2>System Output</h2>
+    <p><strong>Alert System (User-Friendly Display)</strong></p>
+    <ul class="alert">
+        <li class="green">🟢 Green → Normal conditions</li>
+        <li class="yellow">🟡 Yellow → Moderate load (warning stage)</li>
+        <li class="red">🔴 Red → Overcrowded (critical condition)</li>
+    </ul>
+
+    <h2>Expected Outcome</h2>
+    <ul>
+        <li>Early detection of hospital overcrowding</li>
+        <li>Improved patient management</li>
+        <li>Better staff allocation</li>
+        <li>Reduced waiting time</li>
+        <li>Enhanced emergency response efficiency</li>
+    </ul>
+
+    <h2>Project Features</h2>
+    <ul>
+        <li>Simple and interpretable ML model</li>
+        <li>Real-time monitoring capability</li>
+        <li>Easy integration with hospital systems</li>
+        <li>Visual alert system for quick decisions</li>
+    </ul>
+
+    <h2>Future Enhancements</h2>
+    <ul>
+        <li>Use advanced models (Random Forest, Neural Networks)</li>
+        <li>Integrate IoT devices for real-time data</li>
+        <li>Mobile/Web dashboard for live alerts</li>
+        <li>Predictive analytics for future trends</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>
+        This system provides a practical and scalable solution for hospitals to manage patient flow efficiently. 
+        By using Logistic Regression and key parameters, hospitals can take proactive measures before overcrowding becomes critical.
+    </p>
+
+</div>
+
+</body>
+</html>
