@@ -2,15 +2,15 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 import joblib
-import numpy as np
+import pandas as pd
 
-# ✅ FIRST create app
+# Create app
 app = FastAPI()
 
-# ✅ THEN add CORS (correct place)
+# Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # allow all (for development)
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,24 +35,38 @@ def home():
 # Prediction endpoint
 @app.post("/predict")
 def predict(data: PatientData):
-
+    if (
+        data.Current_Patient_Count > 200 and
+        data.Bed_Occupancy_Rate > 0.9 and
+        data.Staff_Availability < 5
+    ):
+        print("RULE TRIGGERED → OVERCROWDED")
+        return {"Overcrowded": 1}
+    # Feature engineering
     load_per_staff = data.Current_Patient_Count / (data.Staff_Availability + 1)
     emergency_pressure = data.Incoming_Emergency_Cases / (data.Current_Patient_Count + 1)
 
-    features = np.array([[
-        data.Current_Patient_Count,
-        data.Bed_Occupancy_Rate,
-        data.Staff_Availability,
-        data.Average_Waiting_Time,
-        data.Incoming_Emergency_Cases,
-        load_per_staff,
-        emergency_pressure
-    ]])
+    # Create DataFrame (IMPORTANT FIX)
+    features = pd.DataFrame([{
+        "Current_Patient_Count": data.Current_Patient_Count,
+        "Bed_Occupancy_Rate": data.Bed_Occupancy_Rate,
+        "Staff_Availability": data.Staff_Availability,
+        "Average_Waiting_Time": data.Average_Waiting_Time,
+        "Incoming_Emergency_Cases": data.Incoming_Emergency_Cases,
+        "load_per_staff": load_per_staff,
+        "emergency_pressure": emergency_pressure
+    }])
 
-    # 👇 ADD THESE LINES
-    print("INPUT FEATURES:", features)
-    print("MODEL OUTPUT:", model.predict(features))
-
+    # Debug logs
+    print("INPUT FEATURES:\n", features)
     prediction = model.predict(features)
+    print("MODEL OUTPUT:", prediction)
+
+    # Optional: probability (if supported)
+    try:
+        prob = model.predict_proba(features)
+        print("PROBABILITY:", prob)
+    except:
+        pass
 
     return {"Overcrowded": int(prediction[0])}
